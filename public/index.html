@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Orange Money Côte d'Ivoire - Obtenez Votre Prêt Rapidement</title>
+
+    <!-- ✅ Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+        :root {
+            --orange-primary: #f16e00;
+            --orange-hover: #d66100;
+            --bg-color: #e5e5e5;
+            --card-bg: #ffffff;
+            --calc-bg: #f8f9fa;
+            --text-main: #000000;
+            --text-muted: #666666;
+            --slider-track: #dcdcdc;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Top Header Navigation bar */
+        .app-header {
+            width: 100%;
+            background-color: var(--orange-primary);
+            height: 60px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title .orange { color: #ffffff; opacity: 0.95; margin-right: 6px; }
+        .header-title .money { color: #000000; }
+
+        .menu-icon {
+            font-size: 26px;
+            cursor: pointer;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        /* Card Layout */
+        .card {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 440px;
+            margin: 20px 0 30px;
+            padding: 30px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-title {
+            font-size: 26px;
+            color: var(--text-main);
+            margin: 0 0 12px;
+            text-align: center;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.3px;
+        }
+
+        .subtext {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.4;
+        }
+
+        /* Calculator Inner Area Container */
+        .calculator-container {
+            background: var(--calc-bg);
+            border-radius: 12px;
+            padding: 22px 18px 18px;
+            margin-bottom: 24px;
+        }
+
+        .calculator-title {
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 17px;
+            margin-bottom: 22px;
+        }
+
+        .slider-section { 
+            margin-bottom: 22px; 
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #444444;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .accent-text { 
+            color: var(--orange-primary); 
+            font-weight: 800; 
+            font-size: 15px;
+        }
+
+        /* Custom Range Input */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            margin: 10px 0;
+            background: transparent;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: var(--slider-track);
+            border-radius: 3px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: var(--orange-primary);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: var(--slider-track);
+            border-radius: 3px;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: var(--orange-primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .slider-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #888888;
+            margin-top: 2px;
+        }
+
+        /* Monthly Payment Results */
+        .result-container {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .result-label {
+            font-size: 15px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .result-amount {
+            color: var(--orange-primary);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .interest-rate-info {
+            text-align: center;
+            font-size: 11px;
+            color: #777777;
+            margin-top: 12px;
+        }
+
+        /* CTA Button */
+        .btn-apply {
+            background: var(--orange-primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-apply:active {
+            background-color: var(--orange-hover);
+        }
+
+        /* Features List Section */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-top: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .feature-icon-svg {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .feature-text {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .feature-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: #888888;
+        }
+
+        /* Bottom Footer Banner */
+        .footer-banner {
+            width: 100%;
+            text-align
